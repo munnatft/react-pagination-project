@@ -1,19 +1,18 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleFetchPassgengerList } from '../store/action';
+import { handleFetchPassgengerList, toggleLoading } from '../store/action';
 import styles from './PassengerLists.module.css';
 import Spinner from './UI/Spinner';
 
 const PassengerLists = () => {
-    console.log("first time")
+    
     const dispatch = useDispatch();
-    const {listOfPassengers , loading} = useSelector(state => state.passenger);
+    const {listOfPassengers , loading , currentPage} = useSelector(state => state.passenger);
 
     useEffect(() => {
-        dispatch(handleFetchPassgengerList(0))
-    },[dispatch])
+        dispatch(handleFetchPassgengerList(currentPage))
+    },[dispatch , currentPage])
 
-    console.log(listOfPassengers)
 
     if(loading) {
         return <Spinner />;
@@ -36,7 +35,7 @@ const PassengerLists = () => {
                         listOfPassengers.map((passenger,index) => {
                             return (
                                 <tr key={passenger._id}>
-                                    <td>{index+1}</td>
+                                    <td>{currentPage*10 + index+1}</td>
                                     <td>{passenger.name}</td>
                                     <td>{passenger.trips}</td>
                                     <td>{passenger.airline[0].name}</td>
@@ -45,6 +44,10 @@ const PassengerLists = () => {
                             )
                         })
                     }
+
+                    {/* {
+                        listOfPassengers.length === 0 && <tr><td>No list of passengers found</td></tr>
+                    } */}
                     
                 </tbody>
             </table>

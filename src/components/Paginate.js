@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentPage } from '../store/action';
 import styles from './Paginate.module.css';
 
 const Paginate = () => {
@@ -6,10 +7,12 @@ const Paginate = () => {
     const { currentPage , totalPages } = useSelector(state => state.passenger);
     const dispatch = useDispatch();
 
-    const handlePreviousClick = () => {}
+    const handlePreviousClick = () => {
+        dispatch(setCurrentPage(currentPage - 1))
+    }
 
     const handleNextClick = () => {
-        console.log("next click")
+        dispatch(setCurrentPage(currentPage + 1))
     }
 
     return (

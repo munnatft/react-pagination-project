@@ -1,6 +1,6 @@
 export const FETCH_PASSENGER_LIST = 'FETCH_PASSENGER_LIST';
 export const TOGGLE_LOADING = 'TOGGLE_LOADING';
-export const LOAD_NEXT_OR_PREV_DATA = 'LOAD_NEXT_OR_PREV_DATA';
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 
 
 
@@ -18,10 +18,10 @@ export const toggleLoading = () => {
     }
 }
 
-export const loadNextOrPrevData= (data) => {
+export const setCurrentPage = (page) => {
     return {
-        type : LOAD_NEXT_OR_PREV_DATA,
-        payload : data
+        type : SET_CURRENT_PAGE,
+        payload : page
     }
 }
 
@@ -32,6 +32,7 @@ export const loadNextOrPrevData= (data) => {
 export const handleFetchPassgengerList = (page) => {
     return async(dispatch) => {
         try {
+            dispatch(toggleLoading())
             const res = await fetch(`https://api.instantwebtools.net/v1/passenger?page=${page}&size=10`);
             const data = await res.json();
             dispatch(toggleLoading())
@@ -42,12 +43,3 @@ export const handleFetchPassgengerList = (page) => {
     }
 }
 
-export const handleNextorPrevDataFetch = (page) => {
-    return async(dispatch) => {
-        try {
-            
-        } catch (error) {
-            
-        }
-    }
-}
