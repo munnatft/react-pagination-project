@@ -1,11 +1,11 @@
-.responsive {
+/* .responsive {
     overflow-x: auto;
-}
+} */
 
 .table {
     width: 80%;
     border-collapse: collapse;
-    height: 80%;
+    height: fit-content;
     font-size: 1.2rem;
     border-radius: 10px 10px 0 0;
     overflow: hidden;
