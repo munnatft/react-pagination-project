@@ -34,11 +34,14 @@ export const handleFetchPassgengerList = (page) => {
         try {
             dispatch(toggleLoading())
             const res = await fetch(`https://api.instantwebtools.net/v1/passenger?page=${page}&size=10`);
+            if(!res.ok) {
+                throw new Error("Failed to fetch the data");
+            }
             const data = await res.json();
             dispatch(toggleLoading())
             dispatch(fetchPassengerList(data));
         } catch (error) {
-            
+            console.log(error.message)
         }
     }
 }

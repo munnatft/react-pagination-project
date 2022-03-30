@@ -45,9 +45,9 @@ const PassengerLists = () => {
                         })
                     }
 
-                    {/* {
-                        listOfPassengers.length === 0 && <tr><td>No list of passengers found</td></tr>
-                    } */}
+                    {
+                        listOfPassengers.length === 0 && <tr><td className={styles['not-found']}>No list of passengers found</td></tr>
+                    }
                     
                 </tbody>
             </table>
