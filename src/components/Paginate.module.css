@@ -22,3 +22,40 @@ button:disabled {
 button:hover {
     background-color: darkslateblue;
 }
+
+ul {
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    background-color: #1b0098b3;
+    
+}
+
+li {
+    list-style: none;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    color: white;
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: bold;
+    border-right: 1px solid #340883;
+    cursor: pointer;
+}
+
+li:hover , button:hover , .active{
+    background-color: #340883;
+}
+
+li:first-child {
+    border-radius: 10px;
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+li:last-child {
+    border-right : none;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}

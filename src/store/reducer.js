@@ -1,4 +1,3 @@
-import { act } from "react-dom/test-utils";
 import { FETCH_PASSENGER_LIST, SET_CURRENT_PAGE, TOGGLE_LOADING } from "./action";
 
 const initialState = {

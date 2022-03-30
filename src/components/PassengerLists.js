@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleFetchPassgengerList, toggleLoading } from '../store/action';
+import { handleFetchPassgengerList } from '../store/action';
 import styles from './PassengerLists.module.css';
 import Spinner from './UI/Spinner';
 
