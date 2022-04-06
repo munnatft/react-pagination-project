@@ -8,8 +8,8 @@ const Paginate = () => {
     const dispatch = useDispatch();
 
     let pageNumbers = [];
-    for(let i=currentPage;i<=currentPage+9;i++){
-        if(currentPage > 5) {
+    for(let i=currentPage;i<=currentPage+5 && currentPage < totalPages;i++){
+        if(currentPage > 6) {
             pageNumbers.push(i-5);
         }
         else {
@@ -24,11 +24,15 @@ const Paginate = () => {
     const handleNextClick = () => {
         dispatch(setCurrentPage(currentPage + 1))
     }
-
+    // const pageBetween = currentPage >=3 && currentPage < 6;
     return (
         <div className={styles['btn-group']}>
-            <button disabled={currentPage === 1} onClick={handlePreviousClick}>&#171;</button>
+            <button disabled={currentPage === 0} onClick={handlePreviousClick}>&#171;</button>
             <ul>
+                {
+                    currentPage >= 3 && 
+                    <li  onClick={() => dispatch(setCurrentPage(0))}>1...</li>
+                }
                 {
                     pageNumbers.map((page) => {
                         return <li 
@@ -36,12 +40,16 @@ const Paginate = () => {
                                     onClick={() => dispatch(setCurrentPage(page))}
                                     className={currentPage === page ? styles['active'] : ''}
                                 >
-                                    { page }
+                                    { page + 1 }
                                 </li>
                     })
                 }
+                {
+                    currentPage < totalPages-3 && 
+                    <li  onClick={() => dispatch(setCurrentPage(totalPages-1))}>...{totalPages}</li>
+                }
             </ul>
-            <button className={styles['btn-last']} disabled={currentPage === totalPages} onClick={handleNextClick}>&#187;</button>
+            <button className={styles['btn-last']} disabled={currentPage >= totalPages-1} onClick={handleNextClick}>&#187;</button>
         </div>
     )
 }

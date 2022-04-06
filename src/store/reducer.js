@@ -5,16 +5,13 @@ const initialState = {
     totalPages : 0,
     passengerLists : {},
     loading : false,
-    currentPage : 1,
-    pages : [],
+    currentPage : 0,
 }
 
 export const PassengerReducer = (state = initialState , action) => {
 
     switch (action.type) {
         case FETCH_PASSENGER_LIST:
-
-            const newPages = [...state.pages,state.currentPage]
             return {
                 ...state ,
                 totalPassengers : action.payload.totalPassengers,
@@ -23,7 +20,6 @@ export const PassengerReducer = (state = initialState , action) => {
                 passengerLists : {...state.passengerLists ,
                     [state.currentPage] : action.payload.data
                 },
-                pages : newPages.filter((page,index) => newPages.indexOf(page) === index),
                 loading : false
             }
 
