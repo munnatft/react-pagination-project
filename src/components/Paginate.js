@@ -4,10 +4,10 @@ import styles from './Paginate.module.css';
 
 const Paginate = () => {
 
-    const { currentPage , totalPages } = useSelector(state => state.passenger);
+    const { totalPages , currentPage } = useSelector(state => state.passenger);
     const dispatch = useDispatch();
 
-    let pageNumbers = []
+    let pageNumbers = [];
     for(let i=currentPage;i<=currentPage+9;i++){
         if(currentPage > 5) {
             pageNumbers.push(i-5);
@@ -27,7 +27,7 @@ const Paginate = () => {
 
     return (
         <div className={styles['btn-group']}>
-            <button disabled={currentPage === 0} onClick={handlePreviousClick}>Previous</button>
+            <button disabled={currentPage === 1} onClick={handlePreviousClick}>&#171;</button>
             <ul>
                 {
                     pageNumbers.map((page) => {
@@ -36,12 +36,12 @@ const Paginate = () => {
                                     onClick={() => dispatch(setCurrentPage(page))}
                                     className={currentPage === page ? styles['active'] : ''}
                                 >
-                                    {page}
+                                    { page }
                                 </li>
                     })
                 }
             </ul>
-            <button disabled={currentPage === totalPages} onClick={handleNextClick}>Next</button>
+            <button className={styles['btn-last']} disabled={currentPage === totalPages} onClick={handleNextClick}>&#187;</button>
         </div>
     )
 }

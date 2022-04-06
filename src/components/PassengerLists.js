@@ -7,11 +7,17 @@ import Spinner from './UI/Spinner';
 const PassengerLists = () => {
     
     const dispatch = useDispatch();
-    const {listOfPassengers , loading , currentPage} = useSelector(state => state.passenger);
+    const { loading , passengerLists , currentPage , pages } = useSelector(state => state.passenger);
+
+    const visitedPage = pages.find(page => page === currentPage);
 
     useEffect(() => {
-        dispatch(handleFetchPassgengerList(currentPage))
-    },[dispatch , currentPage])
+        // if a page is already visited then the action will not be dispatched and api will not be called again for the visited page. 
+        if(!visitedPage) {
+            dispatch(handleFetchPassgengerList(currentPage))
+        } 
+        
+    },[dispatch , visitedPage , currentPage])
 
 
     if(loading) {
@@ -31,11 +37,11 @@ const PassengerLists = () => {
                 </thead>
                 <tbody>
                     {
-                        listOfPassengers.length > 0 &&
-                        listOfPassengers.map((passenger,index) => {
+                        passengerLists[currentPage]?.length > 0 &&
+                        passengerLists[currentPage].map((passenger,index) => {
                             return (
                                 <tr key={passenger._id}>
-                                    <td>{currentPage*10 + index+1}</td>
+                                    <td>{(currentPage - 1)*10 + index+1}</td>
                                     <td>{passenger.name}</td>
                                     <td>{passenger.trips}</td>
                                     <td>{passenger.airline[0].name}</td>
@@ -46,7 +52,7 @@ const PassengerLists = () => {
                     }
 
                     {
-                        listOfPassengers.length === 0 && <tr><td className={styles['not-found']}>No list of passengers found</td></tr>
+                        passengerLists[currentPage]?.length === 0 && <tr><td className={styles['not-found']}>No list of passengers found</td></tr>
                     }
                     
                 </tbody>
